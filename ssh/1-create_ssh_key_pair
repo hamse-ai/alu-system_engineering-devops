@@ -1,4 +1,20 @@
-#!/usr/bin/env bash
-# Script that creates a new ssh key pair
-ssh-keygen -t rsa -b 4096 -N betty -f school
-;s
+#!/bin/bash
+
+# Variables
+PRIVATE_KEY="school"
+BITS=4096
+PASSPHRASE="betty"
+
+# Generate the RSA key pair
+echo "Generating public/private rsa key pair."
+ssh-keygen -t rsa -b $BITS -N "$PASSPHRASE" -f "$PRIVATE_KEY"
+
+# Display the key fingerprint
+echo "Your identification has been saved in $PRIVATE_KEY."
+echo "Your public key has been saved in $PRIVATE_KEY.pub."
+echo "The key fingerprint is:"
+ssh-keygen -lf "$PRIVATE_KEY"
+
+# Display the randomart image
+echo "The key's randomart image is:"
+ssh-keygen -lv -f "$PRIVATE_KEY" -E md5
